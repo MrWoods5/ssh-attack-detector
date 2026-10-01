@@ -53,7 +53,7 @@ Run against the included `sample_auth.log`:
 203.0.113.5: 4 failures (users tried: admin, root)
 203.0.113.22: 4 failures (users tried: root, test)
 203.0.113.87: 3 failures (users tried: admin, oracle, ubuntu)
-198.51.100.7: 1 failure (users tried: collin)
+198.51.100.7: 1 failure (users tried: joe)
 203.0.113.140: 1 failure (users tried: deploy)
 203.0.113.141: 1 failure (users tried: deploy)
 203.0.113.142: 1 failure (users tried: deploy)
