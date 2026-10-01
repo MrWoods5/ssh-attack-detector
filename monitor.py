@@ -34,25 +34,34 @@ def parse_time(stamp):
     return datetime.strptime(f"{datetime.now().year} {stamp}", "%Y %b %d %H:%M:%S")
 
 
-def parse_log(path):
-    # Reads the file and collects every failed login, in order.
+def parse_lines(lines):
+    # Checks log lines one at a time and collects every failed login, in
+    # order. Works on any lines: a file, or text pasted into a web page.
     failures = []
+    for line in lines:
+        # Skips any line that isn't a failed-login line; only matching
+        # lines get processed.
+        match = FAILED_PATTERN.search(line)
+        if match:
+            # Pulls the timestamp, username and address out of a matching
+            # line and keeps them together.
+            stamp, user, ip = match.groups()
+            # Skips lines whose date can't be real (like "Feb 30"), instead
+            # of crashing on them.
+            try:
+                failures.append(Failure(parse_time(stamp), user, ip))
+            except ValueError:
+                continue
 
+    # Hands the full list back once every line's been checked.
+    return failures
+
+
+def parse_log(path):
     # Opens the file (closing it automatically when done) and checks it
     # one line at a time.
     with open(path) as f:
-        for line in f:
-            # Skips any line that isn't a failed-login line; only matching
-            # lines get processed.
-            match = FAILED_PATTERN.search(line)
-            if match:
-                # Pulls the timestamp, username and address out of a
-                # matching line and keeps them together.
-                stamp, user, ip = match.groups()
-                failures.append(Failure(parse_time(stamp), user, ip))
-
-    # Hands the full list back once the whole file's been read.
-    return failures
+        return parse_lines(f)
 
 
 def busiest_window(events, measure):

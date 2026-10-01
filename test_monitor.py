@@ -58,6 +58,22 @@ def test_parse_handles_single_digit_days(tmp_path):
     assert failures[0].time.day == 1
 
 
+def test_parse_lines_works_on_pasted_text():
+    text = failed("10:00:00", "root", "203.0.113.5") + "\n" + accepted("10:00:05", "collin", "198.51.100.7")
+    failures = monitor.parse_lines(text.splitlines())
+    assert [(f.user, f.ip) for f in failures] == [("root", "203.0.113.5")]
+
+
+def test_impossible_dates_are_skipped_not_crashed_on():
+    lines = [
+        "Feb 30 10:00:00 myserver sshd[1]: Failed password for root from 203.0.113.5 port 1 ssh2",
+        "Xyz 21 10:00:00 myserver sshd[1]: Failed password for root from 203.0.113.5 port 1 ssh2",
+        failed("10:00:00", "admin", "203.0.113.5"),
+    ]
+    failures = monitor.parse_lines(lines)
+    assert [f.user for f in failures] == ["admin"]
+
+
 # --- Brute force ---
 
 
