@@ -12,3 +12,9 @@ Sep 21 10:18:09 myserver sshd[1256]: Accepted publickey for collin from 198.51.1
 Sep 21 10:18:31 myserver sshd[1258]: Failed password for invalid user admin from 203.0.113.87 port 53122 ssh2
 Sep 21 10:19:12 myserver sshd[1260]: Failed password for collin from 198.51.100.7 port 40041 ssh2
 Sep 21 10:19:50 myserver sshd[1262]: Accepted password for deploy from 192.0.2.44 port 38820 ssh2
+Sep 21 10:20:05 myserver sshd[1270]: Failed password for deploy from 203.0.113.140 port 54001 ssh2
+Sep 21 10:20:47 myserver sshd[1272]: Failed password for deploy from 203.0.113.141 port 54102 ssh2
+Sep 21 10:21:30 myserver sshd[1274]: Failed password for deploy from 203.0.113.142 port 54203 ssh2
+Sep 21 10:21:58 myserver sshd[1276]: Failed password for deploy from 203.0.113.143 port 54304 ssh2
+Sep 21 11:16:21 myserver sshd[1280]: Failed password for root from 203.0.113.22 port 52088 ssh2
+Sep 21 12:16:21 myserver sshd[1290]: Failed password for root from 203.0.113.22 port 52190 ssh2
